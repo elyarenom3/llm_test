@@ -366,7 +366,7 @@ import pandas as pd
 import re
 from sklearn.model_selection import GroupShuffleSplit
 
-# --- User-provided function for LLM requests ---
+(User-provided function for LLM requests)
 def request_llm(model: str, prompt: str, temperature: float = 0.0) -> str:
     """
     Sends a request to the LLM API and returns the raw response text.
@@ -374,7 +374,7 @@ def request_llm(model: str, prompt: str, temperature: float = 0.0) -> str:
     """
     raise NotImplementedError("Please provide your own implementation of request_llm")
 
-# --- Data Loading and Preprocessing ---
+(Data Loading and Preprocessing)
 
 def load_data(path: str) -> pd.DataFrame:
     df = pd.read_excel(path)
@@ -388,7 +388,7 @@ def load_data(path: str) -> pd.DataFrame:
             )
     return df
 
-# --- Train/Validation/Test Split by Report ---
+(Train/Validation/Test Split by Report)
 
 def split_data(df: pd.DataFrame, report_col: str = 'report_id', train_frac=0.7, val_frac=0.15):
     # First split into train vs temp
@@ -406,7 +406,7 @@ def split_data(df: pd.DataFrame, report_col: str = 'report_id', train_frac=0.7, 
 
     return train_df, val_df, test_df
 
-# --- Building Pairwise Comparison Dataset ---
+(Building Pairwise Comparison Dataset)
 
 def make_pairs(df: pd.DataFrame, summary_prefix='summary', rank_prefix='rank', report_col='report_id') -> pd.DataFrame:
     pairs = []
@@ -440,13 +440,13 @@ def make_pairs(df: pd.DataFrame, summary_prefix='summary', rank_prefix='rank', r
                 })
     return pd.DataFrame(pairs)
 
-# --- Parsing Numbered Lists from LLM Output ---
+(parsing numbered lists from llm output)
 
 def parse_numbered_list(text: str) -> list:
     parts = re.split(r'^\s*\d+[\)\.]\s*', text, flags=re.MULTILINE)
     return [p.strip() for p in parts[1:] if p.strip()]
 
-# --- Evaluation Function ---
+(eval function)
 
 def evaluate_prompt(prompt: str, pairs_df: pd.DataFrame, model: str = 'llama-3.3') -> float:
     correct = 0
@@ -470,8 +470,6 @@ Which is better, A or B?"""
         if (choice == 'A' and row['label'] == 1) or (choice == 'B' and row['label'] == 0):
             correct += 1
     return correct / total
-
-# --- Auto-Prompt Optimizer ---
 
 def auto_optimize(initial_prompt: str,
                   val_pairs: pd.DataFrame,
@@ -517,7 +515,7 @@ def auto_optimize(initial_prompt: str,
     print(f"Final optimized prompt validation accuracy: {best_acc:.3f}")
     return current_prompt, best_acc
 
-# --- Main Execution Flow ---
+main execution flow
 
 def main():
     EXCEL_PATH = 'exane_reports.xlsx'
