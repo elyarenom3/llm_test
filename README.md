@@ -1,3 +1,25 @@
+
+How to run
+Preprocess: python preprocess.py
+Split: python split_dataset.py
+Optimize prompt: python optimize_judge.py
+Evaluate: python evaluate_judge.py
+
+
+This will produce:
+
+pairs.json (all pairwise examples)
+train.json, val.json, test.json
+optimized_prompt.txt (your final judge prompt)
+
+Console logs of validation‐loop accuracies and final test accuracy.
+
+
+
+
+
+
+
 Here’s a detailed, step-by-step recipe to turn your Llama 3.3 into a “judge” that learns to pick the better summary via auto-prompt-optimization, plus a helper function to preprocess your Excel into JSON pairwise comparisons.
 
 ---
