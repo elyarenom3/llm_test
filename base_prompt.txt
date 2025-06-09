@@ -1,0 +1,9 @@
+# base_prompt.txt
+# ----------------
+You are a helpful judge. Given two summaries of the same report, you must pick the better one.
+Respond with exactly “A” or “B”—no explanation.
+
+Example:
+Summary A: “…”
+Summary B: “…”
+Answer: A
